@@ -1,6 +1,3 @@
-import java.util.Arrays;
-
-
 public class TicTacToe {
 	
 	char[][] board = new char[3][3];
@@ -34,9 +31,6 @@ public class TicTacToe {
 	}
 	
 	//  check if the game has been won
-	//	I am passing it the current player instead of using the local variable
-	//	because when I add a computer player, maybe I will want to use this 
-	//	method with '-' for current square and 'o' or  'x' for adjacent
 	public boolean checkforwin(){
 		//only need to check 3 diagonal squares for player, because it is 
 		//not possible to have 3 in a row w/o using one of those squares
@@ -54,6 +48,7 @@ public class TicTacToe {
 				} 
 			}
 		}
+		
 		//Check Columns
 		for(int j = 0; j < 3; j++){
 			for(int i = 0; i < 3; i++) {
@@ -67,6 +62,7 @@ public class TicTacToe {
 				}
 			}
 		}
+		
 		//Check Diagonals
 		if(board[1][1] == currentPlayer) {
 			if(board[0][0] == currentPlayer && board[2][2] == currentPlayer){
@@ -82,18 +78,7 @@ public class TicTacToe {
 	public char getChar(int x, int y) {
 		return board[x-1][y-1];
 	}
-	
-	//pass the coordinates for the current square, and check for adjacent squares
-	public void checkAdjacentSquares(int[] xy) {
-		//check for unchecked adjacent squares
-		//does this square contain my character?
-		//if y: call checkAdjacentSquares again on the adjacent square
-			//if y: return true
-		//if n: call checkAdjacentSquares again
 		
-	}
-
-	
 	public char getCurrentPlayer(){
 		return currentPlayer;
 	}
