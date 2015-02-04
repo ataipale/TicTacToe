@@ -13,44 +13,26 @@ public class TicTacToeGame {
 		TicTacToe newGame = new TicTacToe();
 		
 		//track number of moves that have been made, to preclude checking for 
-		//winning when less than 3 moves have been made by one player
+		//winning when less than 3 moves have been made by one player and to
+		//stop the game if 9 moves have been made, because the gris will be full!
 		int moves = 0;
 		boolean hasWon = false;
 		
 		while(!hasWon && moves < 9){
-			//to check that entered coordinates were acceptable
-			boolean successfulAdd = false; 
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			System.out.println("Player " + newGame.getNextPlayer() + " Turn.");
+			
+			newGame.getNextPlayer();
 			System.out.println();
 			System.out.println("Current Board: ");
 			newGame.printBoard();
-			while (!successfulAdd) {
-				System.out.println();
-				System.out.println("Please enter your desired row number: ");
-				int row = Integer.parseInt(br.readLine());
-				System.out.println("Please enter your desired column number: ");
-				int column = Integer.parseInt(br.readLine());
-				
-				//Checks for in-bound coordinates
-				if(row < 1 || row > 3 || column < 1 || column > 3) {
-					System.out.println("Coordinates out of bounds. Please enter new coordinates.");
-				} else {
-					
-					//Checks for open spot
-					if(newGame.getChar(row, column) == '-'){
-						newGame.addToBoard(row, column);
-						successfulAdd = true;
-					}else {
-						System.out.println("Spot already taken! Please enter new coordinates.");
-					}
-				}
-			}
+			int[] play = getPlayerMove(newGame);
+			newGame.addToBoard(play[0], play[1]);
 			moves++;
 			if (moves > 4) {
-				hasWon = newGame.checkforwin();
+				hasWon = newGame.checkforwin(newGame.getBoard());
 			}
+			
 		}
+		
 		System.out.println("End Board: ");
 		newGame.printBoard();
 		System.out.println();
@@ -61,5 +43,35 @@ public class TicTacToeGame {
 		}
 		
 	}
+	
+	public static int[] getPlayerMove(TicTacToe Game) throws NumberFormatException, IOException {
+		int[] playerMove = new int[2];
+		//to check that entered coordinates were acceptable
+		boolean successfulAdd = false; 
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Human Player " + Game.getCurrentPlayer() + " Turn.");
+		System.out.println();	
+		while (!successfulAdd) {
+			System.out.println();
+			System.out.print("Please enter your desired row number: ");
+			playerMove[0] = Integer.parseInt(br.readLine());
+			System.out.print("Please enter your desired column number: ");
+			playerMove[1] = Integer.parseInt(br.readLine());
+			
+			//Checks for in-bound coordinates
+			if(playerMove[0] < 1 || playerMove[0] > 3 || playerMove[1] < 1 || playerMove[1] > 3) {
+				System.out.println("Coordinates out of bounds. Please enter new coordinates.");
+			} else {
+				
+				//Checks for open spot
+				if(Game.getChar(playerMove[0], playerMove[1]) == '-'){
+					successfulAdd = true;
+				}else {
+					System.out.println("Spot already taken! Please enter new coordinates.");
+				}
+			}
+		}
+		return playerMove; 
+	}	
 
 }

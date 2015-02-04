@@ -31,19 +31,22 @@ public class TicTacToe {
 	}
 	
 	//  check if the game has been won
-	public boolean checkforwin(){
-		//only need to check 3 diagonal squares for player, because it is 
-		//not possible to have 3 in a row w/o using one of those squares
+	public boolean checkforwin(char[][] boardB){
+		/*In the future: 
+		Maybe I can first check the 3 diagonal squares for player, 
+		because it is not possible to have 3 in a row w/o using one 
+		of those squares. */
 		
 		//check rows
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 3; j++) {
-				if(board[i][j] == currentPlayer) {
+				if(boardB[i][j] == currentPlayer) {
 					if(j == 2) {
 						return true;
 					}
 				} else {
-					//exit the j loop
+					//exit the j loop (I know this looks stupid... trying to
+					//think of a better way...) :)
 					j = 3;
 				} 
 			}
@@ -52,7 +55,7 @@ public class TicTacToe {
 		//Check Columns
 		for(int j = 0; j < 3; j++){
 			for(int i = 0; i < 3; i++) {
-				if(board[i][j] == currentPlayer) {
+				if(boardB[i][j] == currentPlayer) {
 					if(i == 2) {
 						return true;
 					}
@@ -64,10 +67,10 @@ public class TicTacToe {
 		}
 		
 		//Check Diagonals
-		if(board[1][1] == currentPlayer) {
-			if(board[0][0] == currentPlayer && board[2][2] == currentPlayer){
+		if(boardB[1][1] == currentPlayer) {
+			if(boardB[0][0] == currentPlayer && boardB[2][2] == currentPlayer){
 				return true;
-			} if(board[0][2] == currentPlayer && board[2][0] == currentPlayer){
+			} if(boardB[0][2] == currentPlayer && boardB[2][0] == currentPlayer){
 				return true;
 			}
 		}
@@ -94,6 +97,10 @@ public class TicTacToe {
 	
 	public void addToBoard(int x, int y) {
 		board[x-1][y-1] = getCurrentPlayer();
+	}
+	
+	public char[][] getBoard() {
+		return board;
 	}
 
 }
