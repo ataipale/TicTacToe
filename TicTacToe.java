@@ -31,7 +31,7 @@ public class TicTacToe {
 	}
 	
 	//  check if the game has been won
-	public boolean checkforwin(char[][] boardB){
+	public boolean checkforwin(){
 		/*In the future: 
 		Maybe I can first check the 3 diagonal squares for player, 
 		because it is not possible to have 3 in a row w/o using one 
@@ -40,7 +40,7 @@ public class TicTacToe {
 		//check rows
 		for(int i = 0; i < 3; i++){
 			for(int j = 0; j < 3; j++) {
-				if(boardB[i][j] == currentPlayer) {
+				if(board[i][j] == currentPlayer) {
 					if(j == 2) {
 						return true;
 					}
@@ -55,7 +55,7 @@ public class TicTacToe {
 		//Check Columns
 		for(int j = 0; j < 3; j++){
 			for(int i = 0; i < 3; i++) {
-				if(boardB[i][j] == currentPlayer) {
+				if(board[i][j] == currentPlayer) {
 					if(i == 2) {
 						return true;
 					}
@@ -67,10 +67,10 @@ public class TicTacToe {
 		}
 		
 		//Check Diagonals
-		if(boardB[1][1] == currentPlayer) {
-			if(boardB[0][0] == currentPlayer && boardB[2][2] == currentPlayer){
+		if(board[1][1] == currentPlayer) {
+			if(board[0][0] == currentPlayer && board[2][2] == currentPlayer){
 				return true;
-			} if(boardB[0][2] == currentPlayer && boardB[2][0] == currentPlayer){
+			} if(board[0][2] == currentPlayer && board[2][0] == currentPlayer){
 				return true;
 			}
 		}

@@ -28,7 +28,7 @@ public class TicTacToeGame {
 			newGame.addToBoard(play[0], play[1]);
 			moves++;
 			if (moves > 4) {
-				hasWon = newGame.checkforwin(newGame.getBoard());
+				hasWon = newGame.checkforwin();
 			}
 			
 		}
